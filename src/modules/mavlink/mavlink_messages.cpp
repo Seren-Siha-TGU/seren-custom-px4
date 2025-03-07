@@ -56,6 +56,15 @@
 #include <uORB/SubscriptionMultiArray.hpp>
 #include <uORB/topics/vehicle_status.h>
 
+
+#include "streams/TARGET_LOCKING_STATUS.hpp"	// include custom streams
+#include "streams/SEREN_ALTITUDE.hpp"
+#include "streams/SEREN_SPEED.hpp"
+#include "streams/SEREN_TELEMETRY.hpp"
+#include "streams/SEREN_KAMIKAZE_INFO.hpp"
+#include "streams/SEREN_LOCK_INFO.hpp"
+
+
 #include "streams/ACTUATOR_OUTPUT_STATUS.hpp"
 #include "streams/ALTITUDE.hpp"
 #include "streams/ATTITUDE.hpp"
@@ -247,6 +256,28 @@ static_assert(MAV_SENSOR_ROTATION_CUSTOM == static_cast<MAV_SENSOR_ORIENTATION>(
 
 
 static const StreamListItem streams_list[] = {
+
+#if defined(TARGET_LOCKING_STATUS_HPP)	// add custom stream to stream list
+	create_stream_list_item<MavlinkStreamTargetLockingStatus>(),
+#endif // TARGET_LOCKING_STATUS_HPP
+#if defined(SEREN_ALTITUDE_HPP)
+	create_stream_list_item<MavlinkStreamSerenAltitude>(),
+#endif // SEREN_ALTITUDE_HPP
+#if defined(SEREN_SPEED_HPP)
+	create_stream_list_item<MavlinkStreamSerenSpeed>(),
+#endif // SEREN_SPEED_HPP
+#if defined(SEREN_TELEMETRY_HPP)
+	create_stream_list_item<MavlinkStreamSerenTelemetry>(),
+#endif // SEREN_TELEMETRY_HPP
+#if defined(SEREN_KAMIKAZE_INFO_HPP)
+    	create_stream_list_item<MavlinkStreamSerenKamikazeInfo>(),
+#endif
+#if defined(SEREN_LOCK_INFO_HPP)
+    	create_stream_list_item<MavlinkStreamSerenLockInfo>(),
+#endif
+
+
+
 #if defined(HEARTBEAT_HPP)
 	create_stream_list_item<MavlinkStreamHeartbeat>(),
 #endif // HEARTBEAT_HPP
