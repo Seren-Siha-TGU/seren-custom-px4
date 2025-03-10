@@ -45,6 +45,7 @@ set(msg_files
 	SerenTargetTelemetry.msg
 	SerenFlightModeChange.msg
 	SerenHssCoordinates.msg
+	SerenQrCoordinates.msg
 
 
 

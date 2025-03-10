@@ -115,6 +115,7 @@
 #include <uORB/topics/seren_target_telemetry.h>
 #include <uORB/topics/seren_flight_mode_change.h>
 #include <uORB/topics/seren_hss_coordinates.h>
+#include <uORB/topics/seren_qr_coordinates.h>
 
 #if !defined(CONSTRAINED_FLASH)
 # include <uORB/topics/debug_array.h>
@@ -165,6 +166,7 @@ private:
 	void handle_message_seren_target_telemetry(mavlink_message_t *msg);
 	void handle_message_seren_flight_mode_change(mavlink_message_t *msg);
 	void handle_message_seren_hss_coordinates(mavlink_message_t *msg);
+	void handle_message_seren_qr_coordinates(mavlink_message_t *msg);
 	void handle_message_adsb_vehicle(mavlink_message_t *msg);
 	void handle_message_att_pos_mocap(mavlink_message_t *msg);
 	void handle_message_battery_status(mavlink_message_t *msg);
@@ -305,6 +307,7 @@ private:
 	uORB::Publication<seren_target_telemetry_s>             _seren_target_telemetry_pub{ORB_ID(seren_target_telemetry)};
 	uORB::Publication<seren_flight_mode_change_s>           _seren_flight_mode_change_pub{ORB_ID(seren_flight_mode_change)};
 	uORB::Publication<seren_hss_coordinates_s>              _seren_hss_coordinates_pub{ORB_ID(seren_hss_coordinates)};
+	uORB::Publication<seren_qr_coordinates_s>               _seren_qr_coordinates_pub{ORB_ID(seren_qr_coordinates)};
 	uORB::Publication<airspeed_s>				_airspeed_pub{ORB_ID(airspeed)};
 	uORB::Publication<battery_status_s>			_battery_pub{ORB_ID(battery_status)};
 	uORB::Publication<camera_status_s>			_camera_status_pub{ORB_ID(camera_status)};

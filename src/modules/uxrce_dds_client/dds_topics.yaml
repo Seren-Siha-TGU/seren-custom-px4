@@ -85,6 +85,9 @@ publications:
 
   - topic: /fmu/out/seren_hss_coordinates
     type: px4_msgs::msg::SerenHssCoordinates
+    
+  - topic: /fmu/out/seren_qr_coordinates
+    type: px4_msgs::msg::SerenQrCoordinates
 
 # Create uORB::Publication
 subscriptions:

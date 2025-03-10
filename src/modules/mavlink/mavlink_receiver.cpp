@@ -151,6 +151,10 @@ MavlinkReceiver::handle_message(mavlink_message_t *msg)
 	case MAVLINK_MSG_ID_SEREN_FLIGHT_MODE_CHANGE:
 		handle_message_seren_flight_mode_change(msg);
 		break;
+		
+	case MAVLINK_MSG_ID_SEREN_QR_COORDINATES:
+		handle_message_seren_qr_coordinates(msg);
+		break;
 
 	case MAVLINK_MSG_ID_COMMAND_LONG:
 		handle_message_command_long(msg);
@@ -488,6 +492,19 @@ void MavlinkReceiver::handle_message_seren_hss_coordinates(mavlink_message_t *ms
 	}
 
 	_seren_hss_coordinates_pub.publish(hss_coordinates);
+}
+
+void MavlinkReceiver::handle_message_seren_qr_coordinates(mavlink_message_t *msg)
+{
+	mavlink_seren_qr_coordinates_t seren_qr_coordinates;
+        mavlink_msg_seren_qr_coordinates_decode(msg, &seren_qr_coordinates);
+
+	seren_qr_coordinates_s qr_coordinates{};
+	qr_coordinates.timestamp = hrt_absolute_time();
+	qr_coordinates.qr_latitude = seren_qr_coordinates.qr_latitude;
+	qr_coordinates.qr_longitude = seren_qr_coordinates.qr_longitude;
+
+	_seren_qr_coordinates_pub.publish(qr_coordinates);
 }
 
 
